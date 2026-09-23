@@ -122,26 +122,28 @@ export const AggregationsPage: React.FC = () => {
         </div>
 
         {/* Scenario Toggle */}
-        <div className="inline-flex rounded-lg border border-gray-200 bg-white p-1 shadow-sm">
+        <div className="inline-flex items-center gap-1.5 p-1 bg-gray-100/90 border border-gray-200 rounded-xl shadow-sm">
           <button
             onClick={() => setActiveScenario('interests')}
-            className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${activeScenario === 'interests'
-              ? 'bg-purple-600 text-white shadow-sm'
-              : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
-              }`}
+            className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
+              activeScenario === 'interests'
+                ? 'bg-purple-600 text-white shadow-sm'
+                : 'text-gray-600 hover:text-gray-900 hover:bg-white/60'
+            }`}
           >
-            <Sparkles className={`w-3.5 h-3.5 ${activeScenario === 'interests' ? 'text-white' : 'text-purple-500'}`} />
-            Scenario 1: Group by Interests
+            <Sparkles className={`w-3.5 h-3.5 ${activeScenario === 'interests' ? 'text-white' : 'text-purple-600'}`} />
+            Group by Interests
           </button>
           <button
             onClick={() => setActiveScenario('posts')}
-            className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${activeScenario === 'posts'
-              ? 'bg-blue-600 text-white shadow-sm'
-              : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
-              }`}
+            className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
+              activeScenario === 'posts'
+                ? 'bg-blue-600 text-white shadow-sm'
+                : 'text-gray-600 hover:text-gray-900 hover:bg-white/60'
+            }`}
           >
-            <Layers className={`w-3.5 h-3.5 ${activeScenario === 'posts' ? 'text-white' : 'text-blue-500'}`} />
-            Scenario 2: User Posts ($lookup)
+            <Layers className={`w-3.5 h-3.5 ${activeScenario === 'posts' ? 'text-white' : 'text-blue-600'}`} />
+            User Post
           </button>
         </div>
       </div>
@@ -358,44 +360,44 @@ export const AggregationsPage: React.FC = () => {
           >
             <form onSubmit={handleCreatePost} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700">Post Title</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1.5">Post Title</label>
                 <input
                   type="text"
                   required
                   value={postTitle}
                   onChange={(e) => setPostTitle(e.target.value)}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                  className="block w-full px-3.5 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
                   placeholder="e.g. MongoDB Aggregation Insights"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700">Post Content</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1.5">Post Content</label>
                 <textarea
                   required
                   rows={4}
                   value={postContent}
                   onChange={(e) => setPostContent(e.target.value)}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                  className="block w-full px-3.5 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
                   placeholder="Write post content visible to everyone..."
                 />
               </div>
 
-              <div className="flex justify-end gap-2 pt-2">
+              <div className="flex items-center justify-end gap-3 pt-4 border-t border-gray-100 mt-5">
                 <button
                   type="button"
                   onClick={() => setIsCreatePostOpen(false)}
-                  className="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer"
+                  className="btn-secondary"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={creatingPost}
-                  className="inline-flex items-center gap-1.5 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium shadow-sm hover:shadow disabled:opacity-50 transition-all cursor-pointer"
+                  className="btn-blue"
                 >
                   <Check className="w-4 h-4" />
-                  {creatingPost ? 'Publishing...' : 'Publish Post'}
+                  <span>{creatingPost ? 'Publishing...' : 'Publish Post'}</span>
                 </button>
               </div>
             </form>

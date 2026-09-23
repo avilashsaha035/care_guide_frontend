@@ -314,47 +314,47 @@ export const NotesPage: React.FC = () => {
       >
         <form onSubmit={handleSaveNote} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700">Title</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1.5">Title</label>
             <input
               type="text"
               required
               value={formTitle}
               onChange={(e) => setFormTitle(e.target.value)}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="block w-full px-3.5 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm"
               placeholder="e.g. Architecture Decisions"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">Content</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1.5">Content</label>
             <textarea
               required
               rows={5}
               value={formContent}
               onChange={(e) => setFormContent(e.target.value)}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="block w-full px-3.5 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm"
               placeholder="Write note content here..."
             />
           </div>
 
-          <div className="flex justify-end gap-2 pt-2">
+          <div className="flex items-center justify-end gap-3 pt-4 border-t border-gray-100 mt-5">
             <button
               type="button"
               onClick={() => {
                 setIsCreateOpen(false);
                 setEditingNote(null);
               }}
-              className="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer"
+              className="btn-secondary"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isSubmitting}
-              className="inline-flex items-center gap-1.5 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-sm font-medium shadow-sm hover:shadow disabled:opacity-50 transition-all cursor-pointer"
+              className="btn-primary"
             >
               <Check className="w-4 h-4" />
-              {isSubmitting ? 'Saving...' : editingNote ? 'Save Changes' : 'Create'}
+              <span>{isSubmitting ? 'Saving...' : editingNote ? 'Save Changes' : 'Create Note'}</span>
             </button>
           </div>
         </form>
@@ -368,22 +368,31 @@ export const NotesPage: React.FC = () => {
       >
         {viewingNote && (
           <div className="space-y-4">
-            <div className="p-3 bg-gray-50 rounded-lg text-xs text-gray-600 space-y-1.5 border border-gray-100">
-              <div className="flex items-center gap-1.5">
+            <div className="p-3.5 bg-gray-50 rounded-xl text-xs text-gray-600 space-y-2 border border-gray-100">
+              <div className="flex items-center gap-2">
                 <FileText className="w-3.5 h-3.5 text-blue-500" />
                 <span><strong>Note ID:</strong> {viewingNote._id}</span>
               </div>
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-2">
                 <UserIcon className="w-3.5 h-3.5 text-indigo-500" />
                 <span><strong>Author:</strong> {getAuthorDisplay(viewingNote)}</span>
               </div>
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-2">
                 <Calendar className="w-3.5 h-3.5 text-amber-500" />
                 <span><strong>Created:</strong> {new Date(viewingNote.createdAt).toLocaleString()}</span>
               </div>
             </div>
-            <div className="prose text-sm text-gray-800 whitespace-pre-wrap leading-relaxed">
+            <div className="prose text-sm text-gray-800 whitespace-pre-wrap leading-relaxed pt-1">
               {viewingNote.content}
+            </div>
+            <div className="flex justify-end pt-3 border-t border-gray-100 mt-4">
+              <button
+                type="button"
+                onClick={() => setViewingNote(null)}
+                className="btn-secondary"
+              >
+                Close
+              </button>
             </div>
           </div>
         )}
@@ -400,15 +409,15 @@ export const NotesPage: React.FC = () => {
           <div className="w-12 h-12 rounded-full bg-rose-50 flex items-center justify-center mx-auto mb-3">
             <AlertTriangle className="w-6 h-6 text-rose-600" />
           </div>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-gray-600 leading-normal">
             Are you sure you want to delete this note? This action cannot be undone.
           </p>
         </div>
-        <div className="flex justify-end gap-2 mt-6">
+        <div className="flex items-center justify-end gap-3 pt-4 border-t border-gray-100 mt-6">
           <button
             type="button"
             onClick={() => setDeleteConfirmId(null)}
-            className="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer"
+            className="btn-secondary"
           >
             Cancel
           </button>
@@ -416,10 +425,10 @@ export const NotesPage: React.FC = () => {
             type="button"
             onClick={() => deleteConfirmId && handleDelete(deleteConfirmId)}
             disabled={isSubmitting}
-            className="inline-flex items-center gap-1.5 px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-lg text-sm font-medium shadow-sm hover:shadow disabled:opacity-50 transition-all cursor-pointer"
+            className="btn-danger"
           >
             <Trash2 className="w-4 h-4" />
-            {isSubmitting ? 'Deleting...' : 'Delete'}
+            <span>{isSubmitting ? 'Deleting...' : 'Delete'}</span>
           </button>
         </div>
       </Modal>

@@ -423,24 +423,24 @@ export const AdminUsersPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex justify-end gap-2 pt-3">
+          <div className="flex items-center justify-end gap-3 pt-4 border-t border-gray-100 mt-5">
             <button
               type="button"
               onClick={() => {
                 setIsAddOpen(false);
                 setEditingUser(null);
               }}
-              className="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer"
+              className="btn-secondary"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isSubmitting}
-              className="inline-flex items-center gap-1.5 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-sm font-medium shadow-sm hover:shadow disabled:opacity-50 transition-all cursor-pointer"
+              className="btn-primary"
             >
               <Check className="w-4 h-4" />
-              {isSubmitting ? 'Saving...' : editingUser ? 'Update User' : 'Create User'}
+              <span>{isSubmitting ? 'Saving...' : editingUser ? 'Update User' : 'Create User'}</span>
             </button>
           </div>
         </form>
@@ -457,17 +457,17 @@ export const AdminUsersPage: React.FC = () => {
           <div className="w-12 h-12 rounded-full bg-rose-50 flex items-center justify-center mx-auto mb-3">
             <AlertTriangle className="w-6 h-6 text-rose-600" />
           </div>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-gray-600 leading-normal">
             Are you sure you want to delete user{' '}
             <strong className="text-gray-900">{deleteConfirmUser?.name}</strong> (
             {deleteConfirmUser?.email})?
           </p>
         </div>
-        <div className="flex justify-end gap-2 mt-6">
+        <div className="flex items-center justify-end gap-3 pt-4 border-t border-gray-100 mt-6">
           <button
             type="button"
             onClick={() => setDeleteConfirmUser(null)}
-            className="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer"
+            className="btn-secondary"
           >
             Cancel
           </button>
@@ -475,10 +475,10 @@ export const AdminUsersPage: React.FC = () => {
             type="button"
             onClick={() => deleteConfirmUser && handleDeleteUser(deleteConfirmUser._id)}
             disabled={isSubmitting}
-            className="inline-flex items-center gap-1.5 px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-lg text-sm font-medium shadow-sm hover:shadow disabled:opacity-50 transition-all cursor-pointer"
+            className="btn-danger"
           >
             <Trash2 className="w-4 h-4" />
-            {isSubmitting ? 'Deleting...' : 'Delete User'}
+            <span>{isSubmitting ? 'Deleting...' : 'Delete User'}</span>
           </button>
         </div>
       </Modal>
