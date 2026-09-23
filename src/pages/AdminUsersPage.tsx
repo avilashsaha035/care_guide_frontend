@@ -4,7 +4,21 @@ import { userService } from '../services/userService';
 import { Pagination } from '../components/Pagination';
 import { Modal } from '../components/Modal';
 import { Alert } from '../components/Alert';
-import { UserPlus, Edit, Trash2, Shield, RefreshCw } from 'lucide-react';
+import {
+  UserPlus,
+  Edit,
+  Trash2,
+  Shield,
+  ShieldCheck,
+  RefreshCw,
+  Users,
+  Mail,
+  User as UserIcon,
+  Lock,
+  Sparkles,
+  AlertTriangle,
+  Check,
+} from 'lucide-react';
 
 export const AdminUsersPage: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -104,7 +118,7 @@ export const AdminUsersPage: React.FC = () => {
           role: formRole,
           interests,
         });
-        setSuccessMsg(`User ${formName} added successfully.`);
+        setSuccessMsg(`User ${formName} created successfully.`);
         setIsAddOpen(false);
       }
 
@@ -120,11 +134,11 @@ export const AdminUsersPage: React.FC = () => {
     try {
       setIsSubmitting(true);
       await userService.deleteUser(id);
-      setSuccessMsg('User removed successfully.');
+      setSuccessMsg('User deleted successfully.');
       setDeleteConfirmUser(null);
       fetchUsers();
     } catch (err: any) {
-      setError(err.message || 'Failed to remove user.');
+      setError(err.message || 'Failed to delete user.');
     } finally {
       setIsSubmitting(false);
     }
@@ -135,8 +149,13 @@ export const AdminUsersPage: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 tracking-tight">User Management</h1>
-          <p className="text-sm text-gray-500">
+          <h1 className="text-2xl font-bold text-gray-900 tracking-tight flex items-center gap-2">
+            <span className="w-8 h-8 rounded-lg bg-purple-50 flex items-center justify-center text-purple-600">
+              <Users className="w-5 h-5 text-purple-600" />
+            </span>
+            User Management
+          </h1>
+          <p className="text-sm text-gray-500 mt-0.5">
             Admin portal to view, add, update, and manage platform users.
           </p>
         </div>
@@ -145,17 +164,17 @@ export const AdminUsersPage: React.FC = () => {
           <button
             onClick={fetchUsers}
             disabled={isLoading}
-            className="p-2 rounded-lg border border-gray-300 bg-white text-gray-600 hover:bg-gray-50 disabled:opacity-50 transition-colors"
+            className="p-2 rounded-lg border border-gray-300 bg-white text-gray-600 hover:bg-blue-50 hover:text-blue-600 disabled:opacity-50 transition-colors"
             title="Refresh users"
           >
-            <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin' : ''}`} />
+            <RefreshCw className={`w-4 h-4 text-blue-600 ${isLoading ? 'animate-spin' : ''}`} />
           </button>
 
           <button
             onClick={handleOpenAdd}
             className="inline-flex items-center gap-1.5 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-sm font-medium shadow-sm transition-colors"
           >
-            <UserPlus className="w-4 h-4" />
+            <UserPlus className="w-4 h-4 text-white" />
             Add User
           </button>
         </div>
@@ -202,63 +221,89 @@ export const AdminUsersPage: React.FC = () => {
                   </td>
                 </tr>
               ) : (
-                users.map((u) => (
-                  <tr key={u._id} className="hover:bg-gray-50 transition-colors">
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm font-medium text-gray-900">{u.name}</div>
-                      <div className="text-xs text-gray-500">{u.email}</div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span
-                        className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold ${
-                          u.role === 'admin'
-                            ? 'bg-purple-100 text-purple-800'
-                            : 'bg-emerald-100 text-emerald-800'
-                        }`}
-                      >
-                        {u.role === 'admin' && <Shield className="w-3 h-3" />}
-                        {u.role.toUpperCase()}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4">
-                      <div className="flex flex-wrap gap-1 max-w-xs">
-                        {u.interests && u.interests.length > 0 ? (
-                          u.interests.map((int, i) => (
-                            <span
-                              key={i}
-                              className="px-2 py-0.5 text-xs bg-gray-100 text-gray-700 rounded-md"
-                            >
-                              {int}
-                            </span>
-                          ))
-                        ) : (
-                          <span className="text-xs text-gray-400 italic">None</span>
-                        )}
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {new Date(u.createdAt).toLocaleDateString()}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      <div className="flex items-center justify-end gap-2">
-                        <button
-                          onClick={() => handleOpenEdit(u)}
-                          className="p-1 text-gray-500 hover:text-indigo-600 rounded"
-                          title="Edit User"
+                users.map((u) => {
+                  const initial = u.name ? u.name.charAt(0).toUpperCase() : 'U';
+                  const isUserAdmin = u.role === 'admin';
+
+                  return (
+                    <tr key={u._id} className="hover:bg-gray-50 transition-colors">
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="flex items-center gap-3">
+                          <div
+                            className={`w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm ${
+                              isUserAdmin
+                                ? 'bg-purple-100 text-purple-700 border border-purple-200'
+                                : 'bg-blue-100 text-blue-700 border border-blue-200'
+                            }`}
+                          >
+                            {initial}
+                          </div>
+                          <div>
+                            <div className="text-sm font-medium text-gray-900">{u.name}</div>
+                            <div className="text-xs text-gray-500 flex items-center gap-1">
+                              <Mail className="w-3 h-3 text-blue-500 inline" />
+                              {u.email}
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <span
+                          className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold ${
+                            isUserAdmin
+                              ? 'bg-purple-100 text-purple-800 border border-purple-200'
+                              : 'bg-emerald-100 text-emerald-800 border border-emerald-200'
+                          }`}
                         >
-                          <Edit className="w-4 h-4" />
-                        </button>
-                        <button
-                          onClick={() => setDeleteConfirmUser(u)}
-                          className="p-1 text-gray-500 hover:text-red-600 rounded"
-                          title="Delete User"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))
+                          {isUserAdmin ? (
+                            <Shield className="w-3.5 h-3.5 text-purple-600" />
+                          ) : (
+                            <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                          )}
+                          {u.role.toUpperCase()}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4">
+                        <div className="flex flex-wrap gap-1 max-w-xs">
+                          {u.interests && u.interests.length > 0 ? (
+                            u.interests.map((int, i) => (
+                              <span
+                                key={i}
+                                className="inline-flex items-center gap-1 px-2 py-0.5 text-xs bg-purple-50 text-purple-700 border border-purple-200 rounded-md font-medium"
+                              >
+                                <Sparkles className="w-2.5 h-2.5 text-purple-500" />
+                                {int}
+                              </span>
+                            ))
+                          ) : (
+                            <span className="text-xs text-gray-400 italic">None</span>
+                          )}
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {new Date(u.createdAt).toLocaleDateString()}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                        <div className="flex items-center justify-end gap-1.5">
+                          <button
+                            onClick={() => handleOpenEdit(u)}
+                            className="p-1.5 text-indigo-600 hover:text-indigo-800 bg-indigo-50 hover:bg-indigo-100 rounded-lg transition-colors"
+                            title="Edit User"
+                          >
+                            <Edit className="w-4 h-4" />
+                          </button>
+                          <button
+                            onClick={() => setDeleteConfirmUser(u)}
+                            className="p-1.5 text-rose-500 hover:text-rose-700 bg-rose-50 hover:bg-rose-100 rounded-lg transition-colors"
+                            title="Delete User"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })
               )}
             </tbody>
           </table>
@@ -293,42 +338,62 @@ export const AdminUsersPage: React.FC = () => {
         <form onSubmit={handleSaveUser} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700">Full Name</label>
-            <input
-              type="text"
-              required
-              value={formName}
-              onChange={(e) => setFormName(e.target.value)}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
-            />
+            <div className="mt-1 relative rounded-md shadow-sm">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <UserIcon className="h-4 w-4 text-blue-500" />
+              </div>
+              <input
+                type="text"
+                required
+                value={formName}
+                onChange={(e) => setFormName(e.target.value)}
+                className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+                placeholder="John Doe"
+              />
+            </div>
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700">Email Address</label>
-            <input
-              type="email"
-              required
-              value={formEmail}
-              onChange={(e) => setFormEmail(e.target.value)}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
-            />
+            <div className="mt-1 relative rounded-md shadow-sm">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <Mail className="h-4 w-4 text-blue-600" />
+              </div>
+              <input
+                type="email"
+                required
+                value={formEmail}
+                onChange={(e) => setFormEmail(e.target.value)}
+                className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+                placeholder="user@example.com"
+              />
+            </div>
           </div>
 
           {!editingUser && (
             <div>
               <label className="block text-sm font-medium text-gray-700">Initial Password</label>
-              <input
-                type="password"
-                required
-                value={formPassword}
-                onChange={(e) => setFormPassword(e.target.value)}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
-                placeholder="Minimum 6 characters"
-              />
+              <div className="mt-1 relative rounded-md shadow-sm">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <Lock className="h-4 w-4 text-amber-500" />
+                </div>
+                <input
+                  type="password"
+                  required
+                  value={formPassword}
+                  onChange={(e) => setFormPassword(e.target.value)}
+                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+                  placeholder="Minimum 6 characters"
+                />
+              </div>
             </div>
           )}
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">Role</label>
+            <label className="block text-sm font-medium text-gray-700 flex items-center gap-1.5">
+              <Shield className="w-3.5 h-3.5 text-purple-600" />
+              Role
+            </label>
             <select
               value={formRole}
               onChange={(e) => setFormRole(e.target.value as UserRole)}
@@ -343,13 +408,18 @@ export const AdminUsersPage: React.FC = () => {
             <label className="block text-sm font-medium text-gray-700">
               Interests (comma separated)
             </label>
-            <input
-              type="text"
-              value={formInterests}
-              onChange={(e) => setFormInterests(e.target.value)}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
-              placeholder="chess, reading, travel"
-            />
+            <div className="mt-1 relative rounded-md shadow-sm">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <Sparkles className="h-4 w-4 text-purple-500" />
+              </div>
+              <input
+                type="text"
+                value={formInterests}
+                onChange={(e) => setFormInterests(e.target.value)}
+                className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+                placeholder="chess, reading, travel"
+              />
+            </div>
           </div>
 
           <div className="flex justify-end gap-2 pt-3">
@@ -359,15 +429,16 @@ export const AdminUsersPage: React.FC = () => {
                 setIsAddOpen(false);
                 setEditingUser(null);
               }}
-              className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50"
+              className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isSubmitting}
-              className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md text-sm font-medium disabled:opacity-50"
+              className="inline-flex items-center gap-1.5 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md text-sm font-medium disabled:opacity-50 transition-colors"
             >
+              <Check className="w-4 h-4" />
               {isSubmitting ? 'Saving...' : editingUser ? 'Update User' : 'Create User'}
             </button>
           </div>
@@ -381,16 +452,21 @@ export const AdminUsersPage: React.FC = () => {
         title="Confirm User Deletion"
         maxWidth="sm"
       >
-        <p className="text-sm text-gray-600">
-          Are you sure you want to delete user{' '}
-          <strong className="text-gray-900">{deleteConfirmUser?.name}</strong> (
-          {deleteConfirmUser?.email})?
-        </p>
+        <div className="text-center py-2">
+          <div className="w-12 h-12 rounded-full bg-rose-50 flex items-center justify-center mx-auto mb-3">
+            <AlertTriangle className="w-6 h-6 text-rose-600" />
+          </div>
+          <p className="text-sm text-gray-600">
+            Are you sure you want to delete user{' '}
+            <strong className="text-gray-900">{deleteConfirmUser?.name}</strong> (
+            {deleteConfirmUser?.email})?
+          </p>
+        </div>
         <div className="flex justify-end gap-2 mt-6">
           <button
             type="button"
             onClick={() => setDeleteConfirmUser(null)}
-            className="px-3 py-1.5 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50"
+            className="px-3.5 py-1.5 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
           >
             Cancel
           </button>
@@ -398,8 +474,9 @@ export const AdminUsersPage: React.FC = () => {
             type="button"
             onClick={() => deleteConfirmUser && handleDeleteUser(deleteConfirmUser._id)}
             disabled={isSubmitting}
-            className="px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-md text-sm font-medium disabled:opacity-50"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-rose-600 hover:bg-rose-700 text-white rounded-md text-sm font-medium disabled:opacity-50 transition-colors"
           >
+            <Trash2 className="w-4 h-4" />
             {isSubmitting ? 'Deleting...' : 'Delete User'}
           </button>
         </div>

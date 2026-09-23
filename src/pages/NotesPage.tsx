@@ -5,7 +5,19 @@ import { noteService } from '../services/noteService';
 import { Pagination } from '../components/Pagination';
 import { Modal } from '../components/Modal';
 import { Alert } from '../components/Alert';
-import { Plus, Edit2, Trash2, Calendar, User as UserIcon, RefreshCw, Eye } from 'lucide-react';
+import {
+  Plus,
+  Edit2,
+  Trash2,
+  Calendar,
+  User as UserIcon,
+  RefreshCw,
+  Eye,
+  FileText,
+  Shield,
+  Check,
+  AlertTriangle,
+} from 'lucide-react';
 
 export const NotesPage: React.FC = () => {
   const { user, isAdmin } = useAuth();
@@ -130,8 +142,13 @@ export const NotesPage: React.FC = () => {
       {/* Top action header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Notes</h1>
-          <p className="text-sm text-gray-500">
+          <h1 className="text-2xl font-bold text-gray-900 tracking-tight flex items-center gap-2">
+            <span className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
+              <FileText className="w-5 h-5 text-blue-600" />
+            </span>
+            Notes
+          </h1>
+          <p className="text-sm text-gray-500 mt-0.5">
             {isAdmin && viewAll
               ? "Viewing all users' notes (Admin Privileges Active)"
               : 'Manage your personal secure notes.'}
@@ -145,30 +162,31 @@ export const NotesPage: React.FC = () => {
                 setViewAll(!viewAll);
                 setCurrentPage(1);
               }}
-              className={`px-3 py-2 text-sm font-medium rounded-lg border transition-colors ${
+              className={`inline-flex items-center gap-1.5 px-3 py-2 text-sm font-medium rounded-lg border transition-colors ${
                 viewAll
                   ? 'bg-purple-50 text-purple-700 border-purple-300'
                   : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
               }`}
             >
-              {viewAll ? 'Switch to My Notes' : "View All Users' Notes"}
+              <Shield className="w-4 h-4 text-purple-600" />
+              <span>{viewAll ? 'Switch to My Notes' : "View All Users' Notes"}</span>
             </button>
           )}
 
           <button
             onClick={fetchNotes}
             disabled={isLoading}
-            className="p-2 rounded-lg border border-gray-300 bg-white text-gray-600 hover:bg-gray-50 disabled:opacity-50 transition-colors"
+            className="p-2 rounded-lg border border-gray-300 bg-white text-gray-600 hover:bg-blue-50 hover:text-blue-600 disabled:opacity-50 transition-colors"
             title="Refresh notes"
           >
-            <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin' : ''}`} />
+            <RefreshCw className={`w-4 h-4 text-blue-600 ${isLoading ? 'animate-spin' : ''}`} />
           </button>
 
           <button
             onClick={handleOpenCreate}
             className="inline-flex items-center gap-1.5 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-sm font-medium shadow-sm transition-colors"
           >
-            <Plus className="w-4 h-4" />
+            <Plus className="w-4 h-4 text-white" />
             Create Note
           </button>
         </div>
@@ -186,13 +204,16 @@ export const NotesPage: React.FC = () => {
         </div>
       ) : notes.length === 0 ? (
         <div className="bg-white border border-dashed border-gray-300 rounded-xl p-12 text-center">
-          <p className="text-gray-500 font-medium">No notes found.</p>
+          <div className="w-14 h-14 mx-auto mb-3 rounded-2xl bg-indigo-50 border border-indigo-100 flex items-center justify-center">
+            <FileText className="w-7 h-7 text-indigo-600" />
+          </div>
+          <p className="text-gray-600 font-medium">No notes found.</p>
           <p className="text-xs text-gray-400 mt-1">Get started by creating your first note.</p>
           <button
             onClick={handleOpenCreate}
-            className="mt-4 inline-flex items-center gap-1 px-3 py-1.5 bg-indigo-50 text-indigo-600 rounded-md text-sm font-medium hover:bg-indigo-100"
+            className="mt-4 inline-flex items-center gap-1.5 px-4 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 rounded-lg text-sm font-medium transition-colors"
           >
-            <Plus className="w-4 h-4" /> New Note
+            <Plus className="w-4 h-4 text-indigo-600" /> New Note
           </button>
         </div>
       ) : (
@@ -210,12 +231,15 @@ export const NotesPage: React.FC = () => {
               >
                 <div className="p-5">
                   <div className="flex items-start justify-between gap-2 mb-2">
-                    <h3 className="font-semibold text-gray-900 line-clamp-1 text-base">
-                      {note.title}
-                    </h3>
+                    <div className="flex items-center gap-2">
+                      <FileText className="w-4 h-4 text-blue-500 shrink-0" />
+                      <h3 className="font-semibold text-gray-900 line-clamp-1 text-base">
+                        {note.title}
+                      </h3>
+                    </div>
                     <button
                       onClick={() => setViewingNote(note)}
-                      className="text-gray-400 hover:text-gray-600 p-1"
+                      className="text-blue-500 hover:text-blue-700 bg-blue-50 hover:bg-blue-100 p-1.5 rounded-lg transition-colors shrink-0"
                       title="View Details"
                     >
                       <Eye className="w-4 h-4" />
@@ -229,28 +253,28 @@ export const NotesPage: React.FC = () => {
 
                 <div className="px-5 py-3 bg-gray-50 border-t border-gray-100 flex items-center justify-between text-xs text-gray-500">
                   <div className="flex items-center gap-3">
-                    <span className="flex items-center gap-1" title="Author">
-                      <UserIcon className="w-3.5 h-3.5" />
+                    <span className="flex items-center gap-1.5 text-gray-600" title="Author">
+                      <UserIcon className="w-3.5 h-3.5 text-indigo-500" />
                       {getAuthorDisplay(note)}
                     </span>
-                    <span className="flex items-center gap-1" title="Date created">
-                      <Calendar className="w-3.5 h-3.5" />
+                    <span className="flex items-center gap-1.5 text-gray-600" title="Date created">
+                      <Calendar className="w-3.5 h-3.5 text-amber-500" />
                       {new Date(note.createdAt).toLocaleDateString()}
                     </span>
                   </div>
 
                   {canModify && (
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-1.5">
                       <button
                         onClick={() => handleOpenEdit(note)}
-                        className="p-1 text-gray-500 hover:text-indigo-600 rounded"
+                        className="p-1.5 text-indigo-600 hover:text-indigo-800 bg-indigo-50 hover:bg-indigo-100 rounded-lg transition-colors"
                         title="Edit Note"
                       >
                         <Edit2 className="w-3.5 h-3.5" />
                       </button>
                       <button
                         onClick={() => setDeleteConfirmId(note._id)}
-                        className="p-1 text-gray-500 hover:text-red-600 rounded"
+                        className="p-1.5 text-rose-500 hover:text-rose-700 bg-rose-50 hover:bg-rose-100 rounded-lg transition-colors"
                         title="Delete Note"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
@@ -278,7 +302,7 @@ export const NotesPage: React.FC = () => {
         disabled={isLoading}
       />
 
-      {/* Create / Edit Modal */}
+      {/* Create / Edit Note Modal */}
       <Modal
         isOpen={isCreateOpen || !!editingNote}
         onClose={() => {
@@ -295,7 +319,7 @@ export const NotesPage: React.FC = () => {
               required
               value={formTitle}
               onChange={(e) => setFormTitle(e.target.value)}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               placeholder="e.g. Architecture Decisions"
             />
           </div>
@@ -307,7 +331,7 @@ export const NotesPage: React.FC = () => {
               rows={5}
               value={formContent}
               onChange={(e) => setFormContent(e.target.value)}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               placeholder="Write note content here..."
             />
           </div>
@@ -326,8 +350,9 @@ export const NotesPage: React.FC = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md text-sm font-medium disabled:opacity-50"
+              className="inline-flex items-center gap-1.5 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md text-sm font-medium disabled:opacity-50 transition-colors"
             >
+              <Check className="w-4 h-4" />
               {isSubmitting ? 'Saving...' : editingNote ? 'Save Changes' : 'Create'}
             </button>
           </div>
@@ -342,18 +367,21 @@ export const NotesPage: React.FC = () => {
       >
         {viewingNote && (
           <div className="space-y-4">
-            <div className="p-3 bg-gray-50 rounded-lg text-xs text-gray-500 space-y-1">
-              <div>
-                <strong>Note ID:</strong> {viewingNote._id}
+            <div className="p-3 bg-gray-50 rounded-lg text-xs text-gray-600 space-y-1.5 border border-gray-100">
+              <div className="flex items-center gap-1.5">
+                <FileText className="w-3.5 h-3.5 text-blue-500" />
+                <span><strong>Note ID:</strong> {viewingNote._id}</span>
               </div>
-              <div>
-                <strong>Author:</strong> {getAuthorDisplay(viewingNote)}
+              <div className="flex items-center gap-1.5">
+                <UserIcon className="w-3.5 h-3.5 text-indigo-500" />
+                <span><strong>Author:</strong> {getAuthorDisplay(viewingNote)}</span>
               </div>
-              <div>
-                <strong>Created:</strong> {new Date(viewingNote.createdAt).toLocaleString()}
+              <div className="flex items-center gap-1.5">
+                <Calendar className="w-3.5 h-3.5 text-amber-500" />
+                <span><strong>Created:</strong> {new Date(viewingNote.createdAt).toLocaleString()}</span>
               </div>
             </div>
-            <div className="prose text-sm text-gray-800 whitespace-pre-wrap">
+            <div className="prose text-sm text-gray-800 whitespace-pre-wrap leading-relaxed">
               {viewingNote.content}
             </div>
           </div>
@@ -367,14 +395,19 @@ export const NotesPage: React.FC = () => {
         title="Confirm Deletion"
         maxWidth="sm"
       >
-        <p className="text-sm text-gray-600">
-          Are you sure you want to delete this note? This action cannot be undone.
-        </p>
+        <div className="text-center py-2">
+          <div className="w-12 h-12 rounded-full bg-rose-50 flex items-center justify-center mx-auto mb-3">
+            <AlertTriangle className="w-6 h-6 text-rose-600" />
+          </div>
+          <p className="text-sm text-gray-600">
+            Are you sure you want to delete this note? This action cannot be undone.
+          </p>
+        </div>
         <div className="flex justify-end gap-2 mt-6">
           <button
             type="button"
             onClick={() => setDeleteConfirmId(null)}
-            className="px-3 py-1.5 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50"
+            className="px-3.5 py-1.5 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
           >
             Cancel
           </button>
@@ -382,8 +415,9 @@ export const NotesPage: React.FC = () => {
             type="button"
             onClick={() => deleteConfirmId && handleDelete(deleteConfirmId)}
             disabled={isSubmitting}
-            className="px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-md text-sm font-medium disabled:opacity-50"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-rose-600 hover:bg-rose-700 text-white rounded-md text-sm font-medium disabled:opacity-50 transition-colors"
           >
+            <Trash2 className="w-4 h-4" />
             {isSubmitting ? 'Deleting...' : 'Delete'}
           </button>
         </div>

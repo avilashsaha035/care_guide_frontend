@@ -55,25 +55,25 @@ export const Pagination: React.FC<PaginationProps> = ({
         <button
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage <= 1 || disabled}
-          className="inline-flex items-center gap-1 px-3 py-1.5 rounded border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+          className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-gray-300 bg-white text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 hover:border-indigo-200 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
           aria-label="Previous page"
         >
-          <ChevronLeft className="w-4 h-4" />
+          <ChevronLeft className="w-4 h-4 text-indigo-600" />
           <span className="hidden sm:inline">Prev</span>
         </button>
 
-        <span className="px-3 py-1 text-gray-700 font-medium">
+        <span className="px-3 py-1 text-gray-700 font-semibold text-xs bg-gray-100 rounded-md">
           {currentPage} / {Math.max(1, totalPages)}
         </span>
 
         <button
           onClick={() => onPageChange(currentPage + 1)}
           disabled={currentPage >= totalPages || disabled}
-          className="inline-flex items-center gap-1 px-3 py-1.5 rounded border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+          className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-gray-300 bg-white text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 hover:border-indigo-200 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
           aria-label="Next page"
         >
           <span className="hidden sm:inline">Next</span>
-          <ChevronRight className="w-4 h-4" />
+          <ChevronRight className="w-4 h-4 text-indigo-600" />
         </button>
       </div>
     </div>
