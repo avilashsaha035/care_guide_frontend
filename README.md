@@ -1,71 +1,79 @@
-# Secure Note-Taking Application - Frontend
+# Secure Note-Taking Platform - Frontend
 
 A lightweight, high-performance Single Page Application (SPA) built from scratch with **React 18, TypeScript, Vite, and React Router DOM**.
 
 ---
 
-## 📖 About the Frontend
-
-### What Does This Frontend Do?
-The frontend provides a fast, responsive user interface designed specifically around functionality, integration, and security:
-1. **Zero Template Bloat:** Built without third-party heavy template kits, adhering strictly to the *"DO NOT USE ANY TEMPLATES"* interview constraint.
-2. **Centralized Routing & Protected Routes (`src/routes/`):**
-   - All URL endpoints are maintained as immutable constants in `src/routes/paths.ts`.
-   - Route guards (`ProtectedRoute`) prevent unauthorized access to authenticated pages and enforce the `admin` role for administrative features.
-3. **Session Management (`AuthContext`):**
-   - Persists JWT tokens in client storage and injects `Authorization: Bearer <token>` into all API requests via a centralized HTTP client (`src/services/api.ts`).
-   - Automatically handles 401 Unauthorized responses to clear expired credentials and redirect to login.
-4. **Notes Management View (`/notes`):**
-   - Paginated list of notes.
-   - Includes an exclusive Admin toggle switch to flip between **"My Notes"** and **"View All Users' Notes"**.
-   - Create, edit, and delete notes with modal forms and validation alerts.
-5. **Admin User Management Portal (`/admin/users`):**
-   - Admin-only view to list all registered users with pagination.
-   - Add new users, edit existing user roles and interest tags, or delete users.
-6. **MongoDB Aggregation Explorer (`/aggregations`):**
-   - **Scenario 1 View:** Visualizes users grouped by interests (e.g. *chess*, *reading*, *gaming*).
-   - **Scenario 2 View:** Allows entering a User ID to inspect their joined posts retrieved via the `$lookup` aggregation pipeline, with an inline post creation form.
-7. **Server-Side Pagination Controls:**
-   - Universal pagination bar with configurable limits (`5`, `10`, `20`, `50`), page indicators, and previous/next buttons to handle high data volumes without browser lag.
-
----
-
 ## 🛠️ Tech Stack
-- **Framework:** React 18
-- **Language:** TypeScript
-- **Build Tool:** Vite
-- **Routing:** React Router DOM v6
-- **Icons & Styling:** Lucide React, Clean Responsive CSS (no heavy framework overhead)
-- **State Management:** React Context API
+
+| Component | Technology | Purpose |
+| :--- | :--- | :--- |
+| **Framework** | React 18 | Declarative component UI library |
+| **Language** | TypeScript | Strict compile-time typing across components, hooks, and services |
+| **Build Tool & Dev Server**| Vite | Fast hot-module replacement and production bundler |
+| **Routing** | React Router DOM v6 | Single page routing, URL synchronization, and route guards |
+| **Icons & Styling** | Lucide React + Clean Modern CSS | Accessible SVG icons and responsive CSS without template overhead |
+| **State Management** | React Context API (`AuthContext`) | Global authentication state and session lifecycle |
 
 ---
 
 ## 💻 Step-by-Step Instructions: Clone to Local Run
 
-### Step 1: Open Terminal in the Frontend Directory
+Follow these steps to clone the repository and run the frontend on your local computer.
+
+### Prerequisites
+Ensure you have installed on your computer:
+1. **Node.js** (v18.x or v20.x or higher) — [Download Node.js](https://nodejs.org/)
+2. **Git** — [Download Git](https://git-scm.com/)
+
+---
+
+### Step 1: Clone the GitHub Repository
+Open your terminal (PowerShell, Command Prompt, or Terminal) and run:
+
 ```bash
-cd care_guide/frontend
+git clone <YOUR_GITHUB_REPOSITORY_URL>
+cd care_guide
+```
+*(Replace `<YOUR_GITHUB_REPOSITORY_URL>` with your actual repository URL)*
+
+---
+
+### Step 2: Navigate to the Frontend Directory
+```bash
+cd frontend
 ```
 
-### Step 2: Install Dependencies
+---
+
+### Step 3: Install Dependencies
 ```bash
 npm install
 ```
 
-### Step 3: Start Development Server
+---
+
+### Step 4: Start the Development Server
 ```bash
 npm run dev
 ```
 
-### Step 4: Open in Web Browser
+---
+
+### Step 5: Open in Your Web Browser
 Navigate your browser to:
 👉 **`http://localhost:5173`**
-
-*(Note: API requests to `/api` are automatically proxied to the backend at `http://localhost:5000` via `vite.config.ts`).*
 
 ---
 
 ## 🔑 Demo Accounts to Test
 
-- **Admin Account:** `admin@mail.com` | `password`
-- **User Account:** `user@mail.com` | `password`
+The backend seeds initial accounts so you can test all roles immediately:
+
+| Account Type | Email | Password | Access Rights & Features |
+| :--- | :--- | :--- | :--- |
+| **System Admin** | `admin@mail.com` | `password` | • Manage personal notes<br>• Switch to **"View All Users' Notes"**<br>• Access **User Management** portal (add, edit, remove users)<br>• Test MongoDB Aggregation pipelines |
+| **Standard User** | `user@mail.com` | `password` | • Manage their own notes only<br>• Cannot access admin panels (protected by RBAC guards) |
+| **Regular User 2**| `avilash@mail.com` | `password` | • Additional user profile with unique interests (`reading`, `chess`, `travel`) |
+
+---
