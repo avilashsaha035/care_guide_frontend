@@ -126,8 +126,8 @@ export const AggregationsPage: React.FC = () => {
           <button
             onClick={() => setActiveScenario('interests')}
             className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${activeScenario === 'interests'
-                ? 'bg-purple-600 text-white shadow-sm'
-                : 'text-gray-600 hover:text-gray-900 hover:bg-white/60'
+              ? 'bg-purple-600 text-white shadow-sm'
+              : 'text-gray-600 hover:text-gray-900 hover:bg-white/60'
               }`}
           >
             <Sparkles className={`w-3.5 h-3.5 ${activeScenario === 'interests' ? 'text-white' : 'text-purple-600'}`} />
@@ -136,8 +136,8 @@ export const AggregationsPage: React.FC = () => {
           <button
             onClick={() => setActiveScenario('posts')}
             className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${activeScenario === 'posts'
-                ? 'bg-blue-600 text-white shadow-sm'
-                : 'text-gray-600 hover:text-gray-900 hover:bg-white/60'
+              ? 'bg-blue-600 text-white shadow-sm'
+              : 'text-gray-600 hover:text-gray-900 hover:bg-white/60'
               }`}
           >
             <Layers className={`w-3.5 h-3.5 ${activeScenario === 'posts' ? 'text-white' : 'text-blue-600'}`} />
@@ -229,7 +229,7 @@ export const AggregationsPage: React.FC = () => {
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setIsCreatePostOpen(true)}
-                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-medium shadow-sm hover:shadow transition-all cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-medium shadow-sm hover:shadow transition-all cursor-pointer"
               >
                 <Plus className="w-3.5 h-3.5" />
                 Write Post
@@ -254,7 +254,7 @@ export const AggregationsPage: React.FC = () => {
               <button
                 onClick={() => fetchUserPosts(targetUserId)}
                 disabled={loadingPosts || !targetUserId}
-                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-gray-900 hover:bg-black text-white rounded-lg text-xs font-medium shadow-sm hover:shadow disabled:opacity-50 transition-all cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-900 hover:bg-black text-white rounded-lg text-xs font-medium shadow-sm hover:shadow disabled:opacity-50 transition-all cursor-pointer"
               >
                 <Search className="w-3.5 h-3.5 text-blue-400" />
                 Query Aggregation
@@ -364,7 +364,7 @@ export const AggregationsPage: React.FC = () => {
                   required
                   value={postTitle}
                   onChange={(e) => setPostTitle(e.target.value)}
-                  className="block w-full px-3.5 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                  className="block w-full px-3 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
                   placeholder="e.g. MongoDB Aggregation Insights"
                 />
               </div>
@@ -376,7 +376,7 @@ export const AggregationsPage: React.FC = () => {
                   rows={4}
                   value={postContent}
                   onChange={(e) => setPostContent(e.target.value)}
-                  className="block w-full px-3.5 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                  className="block w-full px-3 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
                   placeholder="Write post content visible to everyone..."
                 />
               </div>

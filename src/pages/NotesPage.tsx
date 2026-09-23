@@ -162,11 +162,10 @@ export const NotesPage: React.FC = () => {
                 setViewAll(!viewAll);
                 setCurrentPage(1);
               }}
-              className={`inline-flex items-center gap-1.5 px-3 py-2 text-sm font-medium rounded-lg border transition-colors ${
-                viewAll
+              className={`inline-flex items-center gap-1.5 px-3 py-2 text-sm font-medium rounded-lg border transition-colors ${viewAll
                   ? 'bg-purple-50 text-purple-700 border-purple-300'
                   : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
-              }`}
+                }`}
             >
               <Shield className="w-4 h-4 text-purple-600" />
               <span>{viewAll ? 'Switch to My Notes' : "View All Users' Notes"}</span>
@@ -320,7 +319,7 @@ export const NotesPage: React.FC = () => {
               required
               value={formTitle}
               onChange={(e) => setFormTitle(e.target.value)}
-              className="block w-full px-3.5 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm"
+              className="block w-full px-3 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm"
               placeholder="e.g. Architecture Decisions"
             />
           </div>
@@ -332,7 +331,7 @@ export const NotesPage: React.FC = () => {
               rows={5}
               value={formContent}
               onChange={(e) => setFormContent(e.target.value)}
-              className="block w-full px-3.5 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm"
+              className="block w-full px-3 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm"
               placeholder="Write note content here..."
             />
           </div>
