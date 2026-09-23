@@ -173,10 +173,10 @@ export const AdminUsersPage: React.FC = () => {
 
           <button
             onClick={handleOpenAdd}
-            className="inline-flex items-center gap-1.5 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-sm font-medium shadow-sm hover:shadow transition-all"
+            className="btn-primary"
           >
-            <UserPlus className="w-4 h-4 text-white" />
-            Add User
+            <UserPlus className="w-4 h-4" />
+            <span>Add User</span>
           </button>
         </div>
       </div>

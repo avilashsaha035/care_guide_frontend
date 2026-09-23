@@ -114,7 +114,7 @@ export const AggregationsPage: React.FC = () => {
             <span className="w-8 h-8 rounded-lg bg-amber-50 flex items-center justify-center text-amber-600">
               <BarChart3 className="w-5 h-5 text-amber-600" />
             </span>
-            MongoDB Aggregation Pipelines
+            Aggregation
           </h1>
           <p className="text-sm text-gray-500 mt-0.5">
             Real-time execution of evaluated single-pipeline aggregation queries.
@@ -125,22 +125,20 @@ export const AggregationsPage: React.FC = () => {
         <div className="inline-flex items-center gap-1.5 p-1 bg-gray-100/90 border border-gray-200 rounded-xl shadow-sm">
           <button
             onClick={() => setActiveScenario('interests')}
-            className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
-              activeScenario === 'interests'
+            className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${activeScenario === 'interests'
                 ? 'bg-purple-600 text-white shadow-sm'
                 : 'text-gray-600 hover:text-gray-900 hover:bg-white/60'
-            }`}
+              }`}
           >
             <Sparkles className={`w-3.5 h-3.5 ${activeScenario === 'interests' ? 'text-white' : 'text-purple-600'}`} />
             Group by Interests
           </button>
           <button
             onClick={() => setActiveScenario('posts')}
-            className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
-              activeScenario === 'posts'
+            className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${activeScenario === 'posts'
                 ? 'bg-blue-600 text-white shadow-sm'
                 : 'text-gray-600 hover:text-gray-900 hover:bg-white/60'
-            }`}
+              }`}
           >
             <Layers className={`w-3.5 h-3.5 ${activeScenario === 'posts' ? 'text-white' : 'text-blue-600'}`} />
             User Post

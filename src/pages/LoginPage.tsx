@@ -68,50 +68,48 @@ export const LoginPage: React.FC = () => {
 
           <form className="space-y-5" onSubmit={handleSubmit}>
             <div>
-              <label className="block text-sm font-medium text-gray-700">Email address</label>
-              <div className="mt-1 relative rounded-md shadow-sm">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Mail className="h-4 w-4 text-blue-500" />
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">Email address</label>
+              <div className="input-with-actions">
+                <div className="input-left-icon">
+                  <Mail className="w-4 h-4 text-blue-500" />
                 </div>
                 <input
                   type="email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className="input-field"
                   placeholder="user@example.com"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">Password</label>
-              <div className="mt-1 relative rounded-md shadow-sm">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Lock className="h-4 w-4 text-amber-500" />
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">Password</label>
+              <div className="input-with-actions">
+                <div className="input-left-icon">
+                  <Lock className="w-4 h-4 text-amber-500" />
                 </div>
                 <input
                   type={showPassword ? 'text' : 'password'}
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="block w-full pl-10 pr-11 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className="input-field"
                   placeholder="••••••••"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 w-11 flex items-center justify-center text-gray-400 hover:text-indigo-600 focus:outline-none transition-colors cursor-pointer"
+                  className="input-eye-btn"
                   title={showPassword ? 'Hide password' : 'Show password'}
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
                 >
-                  <span className="w-7 h-7 rounded-md flex items-center justify-center hover:bg-gray-100 transition-colors">
-                    {showPassword ? (
-                      <EyeOff className="w-4 h-4 text-indigo-600" />
-                    ) : (
-                      <Eye className="w-4 h-4 text-gray-500 hover:text-indigo-600" />
-                    )}
-                  </span>
+                  {showPassword ? (
+                    <EyeOff className="w-4 h-4 text-indigo-600" />
+                  ) : (
+                    <Eye className="w-4 h-4 text-gray-500 hover:text-indigo-600" />
+                  )}
                 </button>
               </div>
             </div>
@@ -119,10 +117,10 @@ export const LoginPage: React.FC = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full flex justify-center items-center gap-2 py-2.5 px-4 rounded-lg shadow-sm hover:shadow text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 transition-all cursor-pointer"
+              className="btn-primary btn-submit"
             >
-              <LogIn className="w-4 h-4 text-indigo-200" />
-              {isSubmitting ? 'Signing in...' : 'Sign In'}
+              <LogIn className="w-4 h-4" />
+              <span>{isSubmitting ? 'Signing in...' : 'Sign In'}</span>
             </button>
           </form>
         </div>

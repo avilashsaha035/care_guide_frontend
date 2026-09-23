@@ -85,80 +85,79 @@ export const RegisterPage: React.FC = () => {
 
           <form className="space-y-4" onSubmit={handleSubmit}>
             <div>
-              <label className="block text-sm font-medium text-gray-700">Full Name</label>
-              <div className="mt-1 relative rounded-md shadow-sm">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <User className="h-4 w-4 text-blue-500" />
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">Full Name</label>
+              <div className="input-with-actions">
+                <div className="input-left-icon">
+                  <User className="w-4 h-4 text-blue-500" />
                 </div>
                 <input
                   type="text"
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className="input-field"
                   placeholder="Jane Doe"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">Email address</label>
-              <div className="mt-1 relative rounded-md shadow-sm">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Mail className="h-4 w-4 text-blue-600" />
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">Email address</label>
+              <div className="input-with-actions">
+                <div className="input-left-icon">
+                  <Mail className="w-4 h-4 text-blue-600" />
                 </div>
                 <input
                   type="email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className="input-field"
                   placeholder="jane@example.com"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">Password</label>
-              <div className="mt-1 relative rounded-md shadow-sm">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Lock className="h-4 w-4 text-amber-500" />
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">Password</label>
+              <div className="input-with-actions">
+                <div className="input-left-icon">
+                  <Lock className="w-4 h-4 text-amber-500" />
                 </div>
                 <input
                   type={showPassword ? 'text' : 'password'}
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="block w-full pl-10 pr-11 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className="input-field"
                   placeholder="At least 6 characters"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 w-11 flex items-center justify-center text-gray-400 hover:text-indigo-600 focus:outline-none transition-colors cursor-pointer"
+                  className="input-eye-btn"
                   title={showPassword ? 'Hide password' : 'Show password'}
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
                 >
-                  <span className="w-7 h-7 rounded-md flex items-center justify-center hover:bg-gray-100 transition-colors">
-                    {showPassword ? (
-                      <EyeOff className="w-4 h-4 text-indigo-600" />
-                    ) : (
-                      <Eye className="w-4 h-4 text-gray-500 hover:text-indigo-600" />
-                    )}
-                  </span>
+                  {showPassword ? (
+                    <EyeOff className="w-4 h-4 text-indigo-600" />
+                  ) : (
+                    <Eye className="w-4 h-4 text-gray-500 hover:text-indigo-600" />
+                  )}
                 </button>
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 flex items-center gap-1.5">
+              <label className="block text-sm font-medium text-gray-700 mb-1.5 flex items-center gap-1.5">
                 <Shield className="w-3.5 h-3.5 text-purple-600" />
                 Role
               </label>
               <select
                 value={role}
                 onChange={(e) => setRole(e.target.value as UserRole)}
-                className="mt-1 block w-full pl-3 pr-10 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="input-field"
+                style={{ paddingLeft: '0.875rem' }}
               >
                 <option value="user">User</option>
                 <option value="admin">Admin</option>
@@ -166,18 +165,18 @@ export const RegisterPage: React.FC = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">
                 Interests (comma separated)
               </label>
-              <div className="mt-1 relative rounded-md shadow-sm">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Sparkles className="h-4 w-4 text-purple-500" />
+              <div className="input-with-actions">
+                <div className="input-left-icon">
+                  <Sparkles className="w-4 h-4 text-purple-500" />
                 </div>
                 <input
                   type="text"
                   value={interestsInput}
                   onChange={(e) => setInterestsInput(e.target.value)}
-                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className="input-field"
                   placeholder="chess, reading, technology"
                 />
               </div>
@@ -186,10 +185,10 @@ export const RegisterPage: React.FC = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full flex justify-center items-center gap-2 py-2.5 px-4 rounded-lg shadow-sm hover:shadow text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 transition-all cursor-pointer mt-6"
+              className="btn-primary btn-submit mt-6"
             >
-              <UserPlus className="w-4 h-4 text-indigo-200" />
-              {isSubmitting ? 'Registering...' : 'Create Account'}
+              <UserPlus className="w-4 h-4" />
+              <span>{isSubmitting ? 'Registering...' : 'Create Account'}</span>
             </button>
           </form>
         </div>
