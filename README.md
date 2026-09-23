@@ -77,3 +77,7 @@ The backend seeds initial accounts so you can test all roles immediately:
 | **Regular User 2**| `avilash@mail.com` | `password` | • Additional user profile with unique interests (`reading`, `chess`, `travel`) |
 
 ---
+
+## 👉 Live Link
+Open your browser and go to this link:
+**`https://care-guide-frontend.vercel.app`**
