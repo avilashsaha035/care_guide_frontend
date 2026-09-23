@@ -125,22 +125,20 @@ export const AggregationsPage: React.FC = () => {
         <div className="inline-flex rounded-lg border border-gray-200 bg-white p-1 shadow-sm">
           <button
             onClick={() => setActiveScenario('interests')}
-            className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-semibold transition-all ${
-              activeScenario === 'interests'
-                ? 'bg-purple-600 text-white shadow-sm'
-                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
-            }`}
+            className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${activeScenario === 'interests'
+              ? 'bg-purple-600 text-white shadow-sm'
+              : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+              }`}
           >
             <Sparkles className={`w-3.5 h-3.5 ${activeScenario === 'interests' ? 'text-white' : 'text-purple-500'}`} />
             Scenario 1: Group by Interests
           </button>
           <button
             onClick={() => setActiveScenario('posts')}
-            className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-semibold transition-all ${
-              activeScenario === 'posts'
-                ? 'bg-blue-600 text-white shadow-sm'
-                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
-            }`}
+            className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${activeScenario === 'posts'
+              ? 'bg-blue-600 text-white shadow-sm'
+              : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+              }`}
           >
             <Layers className={`w-3.5 h-3.5 ${activeScenario === 'posts' ? 'text-white' : 'text-blue-500'}`} />
             Scenario 2: User Posts ($lookup)
@@ -154,18 +152,17 @@ export const AggregationsPage: React.FC = () => {
           <div className="bg-purple-50 border border-purple-200 rounded-xl p-4 text-xs text-purple-900 flex items-start justify-between">
             <div className="flex items-start gap-2">
               <Sparkles className="w-4 h-4 text-purple-600 shrink-0 mt-0.5" />
-              <div>
-                <span className="font-bold">Scenario 1 Specification:</span> Groups users by their
-                interest tags using exactly one <code className="bg-purple-100 px-1 py-0.5 rounded font-mono text-purple-800">collection.aggregate()</code> call (utilizing <code className="bg-purple-100 px-1 py-0.5 rounded font-mono text-purple-800">$unwind</code> & <code className="bg-purple-100 px-1 py-0.5 rounded font-mono text-purple-800">$group</code>).
+              <div>Groups users by their interest tags.
               </div>
             </div>
             <button
               onClick={fetchGroupedByInterests}
               disabled={loadingInterests}
-              className="ml-4 p-1.5 bg-white border border-purple-200 rounded-md text-purple-600 hover:bg-purple-100 transition-colors"
+              className="btn-icon btn-icon-purple"
+              style={{ width: '2rem', height: '2rem' }}
               title="Re-run Aggregation"
             >
-              <RefreshCw className={`w-3.5 h-3.5 ${loadingInterests ? 'animate-spin text-purple-600' : 'text-purple-600'}`} />
+              <RefreshCw className={`w-3.5 h-3.5 ${loadingInterests ? 'animate-spin' : ''}`} />
             </button>
           </div>
 
@@ -226,18 +223,13 @@ export const AggregationsPage: React.FC = () => {
           <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 text-xs text-blue-900 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div className="flex items-start gap-2">
               <Layers className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
-              <div>
-                <span className="font-bold">Scenario 2 Specification:</span> Retrieves all posts
-                belonging to a particular user using a single aggregation pipeline with a{' '}
-                <code className="bg-blue-100 px-1 py-0.5 rounded font-mono text-blue-800">$lookup</code> stage from the{' '}
-                <code className="bg-blue-100 px-1 py-0.5 rounded font-mono text-blue-800">Posts</code> collection.
-              </div>
+              <div>Retrieves all posts belonging to a particular user using a single aggregation pipeline.</div>
             </div>
 
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setIsCreatePostOpen(true)}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-xs font-medium shadow-sm transition-colors"
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-medium shadow-sm hover:shadow transition-all cursor-pointer"
               >
                 <Plus className="w-3.5 h-3.5" />
                 Write Post
@@ -262,7 +254,7 @@ export const AggregationsPage: React.FC = () => {
               <button
                 onClick={() => fetchUserPosts(targetUserId)}
                 disabled={loadingPosts || !targetUserId}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-900 hover:bg-black text-white rounded-md text-xs font-medium disabled:opacity-50 transition-colors"
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-gray-900 hover:bg-black text-white rounded-lg text-xs font-medium shadow-sm hover:shadow disabled:opacity-50 transition-all cursor-pointer"
               >
                 <Search className="w-3.5 h-3.5 text-blue-400" />
                 Query Aggregation
@@ -275,7 +267,7 @@ export const AggregationsPage: React.FC = () => {
                   setTargetUserId(user._id);
                   fetchUserPosts(user._id);
                 }}
-                className="text-xs text-blue-600 hover:text-blue-800 font-medium underline flex items-center gap-1"
+                className="text-xs text-blue-600 hover:text-blue-800 font-medium underline flex items-center gap-1 cursor-pointer"
               >
                 <UserIcon className="w-3 h-3 text-blue-500" />
                 Use My User ID
@@ -393,14 +385,14 @@ export const AggregationsPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setIsCreatePostOpen(false)}
-                  className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+                  className="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={creatingPost}
-                  className="inline-flex items-center gap-1.5 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-sm font-medium disabled:opacity-50 transition-colors"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium shadow-sm hover:shadow disabled:opacity-50 transition-all cursor-pointer"
                 >
                   <Check className="w-4 h-4" />
                   {creatingPost ? 'Publishing...' : 'Publish Post'}

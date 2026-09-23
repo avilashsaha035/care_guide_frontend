@@ -164,7 +164,8 @@ export const AdminUsersPage: React.FC = () => {
           <button
             onClick={fetchUsers}
             disabled={isLoading}
-            className="p-2 rounded-lg border border-gray-300 bg-white text-gray-600 hover:bg-blue-50 hover:text-blue-600 disabled:opacity-50 transition-colors"
+            className="btn-icon btn-icon-gray"
+            style={{ width: '2.375rem', height: '2.375rem' }}
             title="Refresh users"
           >
             <RefreshCw className={`w-4 h-4 text-blue-600 ${isLoading ? 'animate-spin' : ''}`} />
@@ -172,7 +173,7 @@ export const AdminUsersPage: React.FC = () => {
 
           <button
             onClick={handleOpenAdd}
-            className="inline-flex items-center gap-1.5 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-sm font-medium shadow-sm transition-colors"
+            className="inline-flex items-center gap-1.5 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-sm font-medium shadow-sm hover:shadow transition-all"
           >
             <UserPlus className="w-4 h-4 text-white" />
             Add User
@@ -287,17 +288,17 @@ export const AdminUsersPage: React.FC = () => {
                         <div className="flex items-center justify-end gap-1.5">
                           <button
                             onClick={() => handleOpenEdit(u)}
-                            className="p-1.5 text-indigo-600 hover:text-indigo-800 bg-indigo-50 hover:bg-indigo-100 rounded-lg transition-colors"
+                            className="btn-icon btn-icon-indigo"
                             title="Edit User"
                           >
-                            <Edit className="w-4 h-4" />
+                            <Edit className="w-3.5 h-3.5" />
                           </button>
                           <button
                             onClick={() => setDeleteConfirmUser(u)}
-                            className="p-1.5 text-rose-500 hover:text-rose-700 bg-rose-50 hover:bg-rose-100 rounded-lg transition-colors"
+                            className="btn-icon btn-icon-rose"
                             title="Delete User"
                           >
-                            <Trash2 className="w-4 h-4" />
+                            <Trash2 className="w-3.5 h-3.5" />
                           </button>
                         </div>
                       </td>
@@ -429,14 +430,14 @@ export const AdminUsersPage: React.FC = () => {
                 setIsAddOpen(false);
                 setEditingUser(null);
               }}
-              className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+              className="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isSubmitting}
-              className="inline-flex items-center gap-1.5 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md text-sm font-medium disabled:opacity-50 transition-colors"
+              className="inline-flex items-center gap-1.5 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-sm font-medium shadow-sm hover:shadow disabled:opacity-50 transition-all cursor-pointer"
             >
               <Check className="w-4 h-4" />
               {isSubmitting ? 'Saving...' : editingUser ? 'Update User' : 'Create User'}
@@ -466,7 +467,7 @@ export const AdminUsersPage: React.FC = () => {
           <button
             type="button"
             onClick={() => setDeleteConfirmUser(null)}
-            className="px-3.5 py-1.5 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+            className="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer"
           >
             Cancel
           </button>
@@ -474,7 +475,7 @@ export const AdminUsersPage: React.FC = () => {
             type="button"
             onClick={() => deleteConfirmUser && handleDeleteUser(deleteConfirmUser._id)}
             disabled={isSubmitting}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-rose-600 hover:bg-rose-700 text-white rounded-md text-sm font-medium disabled:opacity-50 transition-colors"
+            className="inline-flex items-center gap-1.5 px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-lg text-sm font-medium shadow-sm hover:shadow disabled:opacity-50 transition-all cursor-pointer"
           >
             <Trash2 className="w-4 h-4" />
             {isSubmitting ? 'Deleting...' : 'Delete User'}

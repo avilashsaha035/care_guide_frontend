@@ -94,7 +94,7 @@ export const Navbar: React.FC = () => {
 
             <button
               onClick={handleLogout}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium text-gray-600 hover:text-rose-600 hover:bg-rose-50 border border-gray-200 transition-colors ml-2"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium text-gray-700 hover:text-rose-600 hover:bg-rose-50 border border-gray-200 hover:border-rose-200 transition-all cursor-pointer ml-2"
               title="Logout"
             >
               <LogOut className="w-4 h-4 text-rose-500" />

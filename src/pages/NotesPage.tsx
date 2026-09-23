@@ -176,7 +176,8 @@ export const NotesPage: React.FC = () => {
           <button
             onClick={fetchNotes}
             disabled={isLoading}
-            className="p-2 rounded-lg border border-gray-300 bg-white text-gray-600 hover:bg-blue-50 hover:text-blue-600 disabled:opacity-50 transition-colors"
+            className="btn-icon btn-icon-gray"
+            style={{ width: '2.375rem', height: '2.375rem' }}
             title="Refresh notes"
           >
             <RefreshCw className={`w-4 h-4 text-blue-600 ${isLoading ? 'animate-spin' : ''}`} />
@@ -184,7 +185,7 @@ export const NotesPage: React.FC = () => {
 
           <button
             onClick={handleOpenCreate}
-            className="inline-flex items-center gap-1.5 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-sm font-medium shadow-sm transition-colors"
+            className="inline-flex items-center gap-1.5 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-sm font-medium shadow-sm hover:shadow transition-all"
           >
             <Plus className="w-4 h-4 text-white" />
             Create Note
@@ -239,7 +240,7 @@ export const NotesPage: React.FC = () => {
                     </div>
                     <button
                       onClick={() => setViewingNote(note)}
-                      className="text-blue-500 hover:text-blue-700 bg-blue-50 hover:bg-blue-100 p-1.5 rounded-lg transition-colors shrink-0"
+                      className="btn-icon btn-icon-blue"
                       title="View Details"
                     >
                       <Eye className="w-4 h-4" />
@@ -267,14 +268,14 @@ export const NotesPage: React.FC = () => {
                     <div className="flex items-center gap-1.5">
                       <button
                         onClick={() => handleOpenEdit(note)}
-                        className="p-1.5 text-indigo-600 hover:text-indigo-800 bg-indigo-50 hover:bg-indigo-100 rounded-lg transition-colors"
+                        className="btn-icon btn-icon-indigo"
                         title="Edit Note"
                       >
                         <Edit2 className="w-3.5 h-3.5" />
                       </button>
                       <button
                         onClick={() => setDeleteConfirmId(note._id)}
-                        className="p-1.5 text-rose-500 hover:text-rose-700 bg-rose-50 hover:bg-rose-100 rounded-lg transition-colors"
+                        className="btn-icon btn-icon-rose"
                         title="Delete Note"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
@@ -343,14 +344,14 @@ export const NotesPage: React.FC = () => {
                 setIsCreateOpen(false);
                 setEditingNote(null);
               }}
-              className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50"
+              className="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isSubmitting}
-              className="inline-flex items-center gap-1.5 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md text-sm font-medium disabled:opacity-50 transition-colors"
+              className="inline-flex items-center gap-1.5 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-sm font-medium shadow-sm hover:shadow disabled:opacity-50 transition-all cursor-pointer"
             >
               <Check className="w-4 h-4" />
               {isSubmitting ? 'Saving...' : editingNote ? 'Save Changes' : 'Create'}
@@ -407,7 +408,7 @@ export const NotesPage: React.FC = () => {
           <button
             type="button"
             onClick={() => setDeleteConfirmId(null)}
-            className="px-3.5 py-1.5 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+            className="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer"
           >
             Cancel
           </button>
@@ -415,7 +416,7 @@ export const NotesPage: React.FC = () => {
             type="button"
             onClick={() => deleteConfirmId && handleDelete(deleteConfirmId)}
             disabled={isSubmitting}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-rose-600 hover:bg-rose-700 text-white rounded-md text-sm font-medium disabled:opacity-50 transition-colors"
+            className="inline-flex items-center gap-1.5 px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-lg text-sm font-medium shadow-sm hover:shadow disabled:opacity-50 transition-all cursor-pointer"
           >
             <Trash2 className="w-4 h-4" />
             {isSubmitting ? 'Deleting...' : 'Delete'}

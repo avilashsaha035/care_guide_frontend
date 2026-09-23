@@ -32,7 +32,7 @@ export const Alert: React.FC<AlertProps> = ({ type = 'info', message, onClose })
         <button
           onClick={onClose}
           type="button"
-          className="text-gray-400 hover:text-gray-600 transition-colors"
+          className="w-6 h-6 rounded flex items-center justify-center text-gray-400 hover:text-gray-700 hover:bg-black/5 transition-colors cursor-pointer"
           aria-label="Dismiss alert"
         >
           <X className="w-4 h-4" />

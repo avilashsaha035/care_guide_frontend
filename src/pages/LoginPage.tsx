@@ -95,21 +95,23 @@ export const LoginPage: React.FC = () => {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="block w-full pl-10 pr-10 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className="block w-full pl-10 pr-11 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   placeholder="••••••••"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-indigo-600 focus:outline-none transition-colors"
+                  className="absolute inset-y-0 right-0 w-11 flex items-center justify-center text-gray-400 hover:text-indigo-600 focus:outline-none transition-colors cursor-pointer"
                   title={showPassword ? 'Hide password' : 'Show password'}
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
                 >
-                  {showPassword ? (
-                    <EyeOff className="h-4 w-4 text-indigo-600" />
-                  ) : (
-                    <Eye className="h-4 w-4 text-gray-400 hover:text-indigo-500" />
-                  )}
+                  <span className="w-7 h-7 rounded-md flex items-center justify-center hover:bg-gray-100 transition-colors">
+                    {showPassword ? (
+                      <EyeOff className="w-4 h-4 text-indigo-600" />
+                    ) : (
+                      <Eye className="w-4 h-4 text-gray-500 hover:text-indigo-600" />
+                    )}
+                  </span>
                 </button>
               </div>
             </div>
@@ -117,7 +119,7 @@ export const LoginPage: React.FC = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full flex justify-center items-center gap-2 py-2.5 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 transition-colors"
+              className="w-full flex justify-center items-center gap-2 py-2.5 px-4 rounded-lg shadow-sm hover:shadow text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 transition-all cursor-pointer"
             >
               <LogIn className="w-4 h-4 text-indigo-200" />
               {isSubmitting ? 'Signing in...' : 'Sign In'}
