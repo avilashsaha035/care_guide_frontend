@@ -95,8 +95,10 @@ export const AggregationsPage: React.FC = () => {
       setPostTitle('');
       setPostContent('');
       setIsCreatePostOpen(false);
-      if (targetUserId) {
-        fetchUserPosts(targetUserId);
+      const queryId = user?._id || targetUserId;
+      if (queryId) {
+        setTargetUserId(queryId);
+        fetchUserPosts(queryId);
       }
     } catch (err: any) {
       setErrorPosts(err.message || 'Failed to create post.');
@@ -248,6 +250,11 @@ export const AggregationsPage: React.FC = () => {
                 type="text"
                 value={targetUserId}
                 onChange={(e) => setTargetUserId(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && targetUserId) {
+                    fetchUserPosts(targetUserId);
+                  }
+                }}
                 placeholder="Paste User ObjectId here..."
                 className="flex-1 max-w-md px-3 py-1.5 text-xs font-mono border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
               />
@@ -324,7 +331,10 @@ export const AggregationsPage: React.FC = () => {
                   </div>
                 ) : (
                   <div className="space-y-3">
-                    {userWithPosts.posts.map((post) => (
+                    {userWithPosts.posts
+                      .slice()
+                      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+                      .map((post) => (
                       <div
                         key={post._id}
                         className="p-4 rounded-lg border border-gray-200 bg-gray-50/50 hover:bg-gray-50 transition-colors"
