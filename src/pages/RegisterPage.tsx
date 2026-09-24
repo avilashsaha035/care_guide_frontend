@@ -14,6 +14,8 @@ export const RegisterPage: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [role, setRole] = useState<UserRole>('user');
   const [interestsInput, setInterestsInput] = useState('chess, reading');
   const [error, setError] = useState<string | null>(null);
@@ -23,13 +25,18 @@ export const RegisterPage: React.FC = () => {
     e.preventDefault();
     setError(null);
 
-    if (!name || !email || !password) {
+    if (!name || !email || !password || !confirmPassword) {
       setError('Please fill in all required fields.');
       return;
     }
 
     if (password.length < 6) {
       setError('Password must be at least 6 characters.');
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setError('Passwords do not match.');
       return;
     }
 
@@ -140,6 +147,36 @@ export const RegisterPage: React.FC = () => {
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
                 >
                   {showPassword ? (
+                    <EyeOff className="w-4 h-4 text-indigo-600" />
+                  ) : (
+                    <Eye className="w-4 h-4 text-gray-500 hover:text-indigo-600" />
+                  )}
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">Confirm Password</label>
+              <div className="input-with-actions">
+                <div className="input-left-icon">
+                  <Lock className="w-4 h-4 text-amber-500" />
+                </div>
+                <input
+                  type={showConfirmPassword ? 'text' : 'password'}
+                  required
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  className="input-field"
+                  placeholder="Repeat your password"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  className="input-eye-btn"
+                  title={showConfirmPassword ? 'Hide password' : 'Show password'}
+                  aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
+                >
+                  {showConfirmPassword ? (
                     <EyeOff className="w-4 h-4 text-indigo-600" />
                   ) : (
                     <Eye className="w-4 h-4 text-gray-500 hover:text-indigo-600" />

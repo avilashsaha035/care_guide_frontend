@@ -22,7 +22,7 @@ export const Navbar: React.FC = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo & Navigation */}
           <div className="flex items-center gap-8">
-            <Link to={PATHS.NOTES} className="flex items-center gap-2.5 cursor-pointer">
+            <Link to={PATHS.NOTES} className="flex items-center gap-2.5 cursor-pointer no-underline">
               <div className="w-9 h-9 rounded-xl bg-gradient-indigo flex items-center justify-center text-white shadow-sm">
                 <FileText className="w-5 h-5 text-white" />
               </div>
@@ -32,7 +32,7 @@ export const Navbar: React.FC = () => {
             <nav className="flex items-center gap-1 sm:gap-2">
               <Link
                 to={PATHS.NOTES}
-                className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium no-underline transition-colors ${
                   isActive(PATHS.NOTES)
                     ? 'bg-blue-50 text-blue-700'
                     : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
@@ -45,7 +45,7 @@ export const Navbar: React.FC = () => {
               {isAdmin && (
                 <Link
                   to={PATHS.ADMIN_USERS}
-                  className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                  className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium no-underline transition-colors ${
                     isActive(PATHS.ADMIN_USERS)
                       ? 'bg-purple-50 text-purple-700'
                       : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
@@ -58,7 +58,7 @@ export const Navbar: React.FC = () => {
 
               <Link
                 to={PATHS.AGGREGATIONS}
-                className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium no-underline transition-colors ${
                   isActive(PATHS.AGGREGATIONS)
                     ? 'bg-amber-50 text-amber-700'
                     : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
